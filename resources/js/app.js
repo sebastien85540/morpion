@@ -14,13 +14,13 @@ let hauteurLigne = hauteur/nbLignes;
 let largeurColonne = largeur/nbColonnes;
 
 let ratioCroix = 0.7;
-let epaisseurCroix = 1;
+let epaisseurCroix = 7;
 let couleurCroix = "red";
 
 
 
 let ratioRond = 0.7;
-let epaisseurRond = 1;
+let epaisseurRond = 7;
 let couleurRond = "blue";
 let rayonRond = largeurColonne;
 if (largeurColonne > hauteurLigne){
@@ -52,7 +52,7 @@ ctx.strokeRect (0, 0, largeur, hauteur);
 
 
 ctx.beginPath()
-ctx.lineWidth = 2;
+ctx.lineWidth = 1;
 ctx.strokeStyle = "black";
 
 for(let i = 0;i < nbLignes-1; i++){
@@ -67,4 +67,75 @@ ctx.stroke();
 }
 ctx.closePath();
 
+// Evenement clic
+c.addEventListener("click", play, false);
 
+
+
+//fonction de croix
+function createCroix(x, y) {
+    ctx.beginPath();
+    ctx.lineWidth = epaisseurCroix;
+    ctx.strokeStyle = couleurCroix;
+    ctx.moveTo(x- (largeurColonne/2) * ratioCroix, y - (hauteurLigne/2)* ratioCroix);
+    ctx.lineTo(x + (largeurColonne/2) * ratioCroix, y + (hauteurLigne/2)* ratioCroix);
+
+
+    ctx.moveTo(x + (largeurColonne/2)* ratioCroix, y - (hauteurLigne/2)* ratioCroix);
+    ctx.lineTo(x - (largeurColonne/2)* ratioCroix, y + (hauteurLigne/2)* ratioCroix);
+
+    ctx.stroke();
+    ctx.closePath();
+} 
+
+
+//Creation de rond
+function createRond(x , y) {
+    ctx.beginPath();
+    ctx.lineWidth = epaisseurRond;
+    ctx.strokeStyle = couleurRond;
+    ctx.arc(x, y, rayonRond, 0, 2*Math.PI);
+    ctx.stroke();
+}
+
+//Recuperer les coordonnées des cases
+function play(event) {
+ x = event.clientX - c.offsetLeft;
+ y = event.clientY - c.offsetTop + document.documentElement.scrollTop;
+
+ let caseX = parseInt(x /(largeur/nbColonnes));
+ let caseY = parseInt(y / (hauteur/nbLignes));
+
+
+ let milieuX = caseX * largeurColonne + largeurColonne / 2;
+ let milieuY = caseY * hauteurLigne + hauteurLigne / 2;
+
+
+ if (jeu) {
+     if (!coups[caseY][caseX]) {
+         if (joueurActuel){
+             createCroix(milieuX, milieuY);
+             coups[caseY][caseX] = "croix";
+             document.getElementById("joueur").innerHTML = "au joueur de placer un rond";
+         }
+         else{
+             createRond(milieuX, milieuY);
+             coups[caseY][caseX] = "rond";
+             document.getElementById("joueur").innerHTML = "au joueur de placer une croix";
+         }
+         joueurActuel = !joueurActuel;
+     }
+ }
+
+}
+
+function end() {
+    for (let i = 0; i < nbLignes; i++){
+        for ( let j = 0; j < nbColonnes; j++){
+            if (coups[i][j] = false){
+                return false ;
+            }
+        }
+    }
+    return true;
+}
