@@ -1,0 +1,45 @@
+/* DESCRIPTION
+
+    - TITLE : Morpion
+    - VERSION: 1.0.0
+    - AUTHOR : Sebastien REYNAUD
+
+*/
+/*   FONTS
+
+    - DEFAULT: 
+    - H1: 'Arial'
+*/
+
+/*   STYLE
+
+    - DEFAULT: #fff
+    - H1: 
+
+*/
+
+/*=========================BODY==============================*/
+
+body{
+    background-color: #fff;
+}
+h1{
+    color: green;
+    text-align: center;
+}
+h3{
+    text-align: center;
+
+}
+.corps{
+    
+    background-image: url(../images/morpion.jpeg);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    height: 700px;
+}
+
+canvas{
+    margin-left: 40%;
+    opacity: 0.2;
+}
