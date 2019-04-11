@@ -37,9 +37,10 @@ h3{
     background-repeat: no-repeat;
     background-size: 80%;
     height: 700px;
+    text-align: center;
 }
 
 canvas{
-    margin-left: 40%;
     opacity: 0.4;
+    margin-left: 77px;
 }

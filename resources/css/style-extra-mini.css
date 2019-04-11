@@ -1,0 +1,10 @@
+@media all and (max-width: 360px){
+    body{
+        display: block;
+    }
+    canvas{
+        margin-left: 0;
+        width: 75%;
+        height: auto;
+    }
+}
